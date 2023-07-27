@@ -1,0 +1,9 @@
+exports.barFalse = '<:BarFalse:1097894553740116109>';
+exports.rip = '<:RIP:1091768169166819498>';
+exports.scratch = '<:Scratch:1091766171608555622>';
+exports.rickroll = '<:rickroll_static:1092852857562218638>';
+exports.arthur = '<:arthur:1109122456884613130>';
+exports.python = '<:python:1091395113843957760>';
+exports.barTrue = '<:BarTrue:1097894803720654979>';
+exports.liquidDrinkers = '<:liquiddrinkers:1097901807545626715>';
+exports.doug = '<:douglloyd:1105890013297791036>';
