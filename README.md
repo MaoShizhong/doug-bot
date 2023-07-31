@@ -17,12 +17,15 @@ N.B. Instead of pushing to a new branch here, please fork and PR (partially for 
 
 ### Prerequisites for local testing
 
+-   **IMPORTANT -** Ensure node and npm are installed, and that node is <u>at least</u> `v20.0.0`
+    <br><br>
 -   [Set up a bot as a discord application](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot) then put the bot's key in a root-level `.env` file e.g. `DISCORD_TOKEN=F4K3pTk.42069FO0BAR_zk5MA.Gm-oaA.14e4D0UGL1OYDlTdFZmYi_2-Z-lGf-hLMAOoYplN`.
 -   Make a discord server and pass the server ID into `index.js` in the line (around 33):<br>
     `const guild = client.guilds.cache.get(putIDHereAsAString);`<br>
     or some equivalent method.
 -   In `index.js`, check out<br>
-    `client.on('guildMemberAdd', ...`<br>
+    `client.on('guildMemberAdd', ... )`<br>
     and adjust server ID as necessary.
 -   In `index.js`, change `dougID` to your test bot's ID.
 -   Make a directory called `user_profiles` then create an empty `users.json` inside it.
+-   In the project root directory, run `npm i` to install all necessary packages.
