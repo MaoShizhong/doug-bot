@@ -19,7 +19,7 @@ class User {
         totalMessages = 0,
         douggedMessages = 0,
         douggedPercentage = '00.00%',
-        gold = 500,
+        gold = 250,
         lastGoldClaim = 0,
         profileColor = 0xffffff
     ) {
