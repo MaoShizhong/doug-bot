@@ -46,7 +46,7 @@ const helpTwo = new EmbedBuilder()
         { name: '/gold', value: `Claim ${User.goldClaimAmount}${gold} - 60 minute cooldown.` },
         {
             name: '/slots {bet: optional}',
-            value: `e.g. \`/slots\` or \`/slots 100\`\nPlay slots or place a bet with ${gold} and try your luck. Maybe you\'ll win big!`,
+            value: `e.g. \`/slots\` or \`/slots 100\`\nPlay slots or place a bet with ${gold} (min: 1 - max: 5000${gold} bet) and try your luck. Maybe you\'ll win big!`,
         },
         { name: '/slotpatterns', value: 'Shows the 11 match lines for slots.' },
         {

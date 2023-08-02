@@ -8,7 +8,11 @@ module.exports = {
         .setName('slots')
         .setDescription('Try your luck at the slots!')
         .addIntegerOption((option) =>
-            option.setName('bet').setDescription('optional gold bet').setMinValue(1)
+            option
+                .setName('bet')
+                .setDescription('optional gold bet (min. 1 / max. 5000')
+                .setMinValue(1)
+                .setMaxValue(5000)
         ),
     async execute(interaction) {
         const account = User.users.find((user) => user.id === interaction.member.id);
