@@ -17,16 +17,6 @@ class FiveCardDraw {
         return this.hand;
     }
 
-    // TODO: remove this once ReactionCollector implemented to change card objects' redraw values
-    setRedrawValues(redrawsArr) {
-        redrawsArr.forEach((isRedraw, i) => {
-            if (isRedraw) {
-                this.hand[i].redraw = true;
-            }
-        });
-        // console.log(redrawsArr);
-    }
-
     playRedrawnHand() {
         this.hand = this.hand.map((card) => {
             return card.redraw ? this.undrawnCards.shift() : card;
@@ -72,17 +62,3 @@ class FiveCardDraw {
 }
 
 exports.FiveCardDraw = FiveCardDraw;
-
-// const poker = new FiveCardDraw(100);
-// // poker.playFirstHand();
-
-// const redraws = [];
-// for (let i = 0; i < 5; i++) {
-//     redraws.push(Math.random() < 0.5);
-// }
-
-// //poker.setRedrawValues(redraws);
-
-// poker.playRedrawnHand();
-
-// poker.scoreHand();

@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const { PokerScorer } = require('./PokerScorer.js');
 const { gold } = require('../../emojis/general_emojis.js');
+const { Storage } = require('../../local-storage.js');
 
 function getBasePokerEmbed(account, bet) {
     const space = '\u2004\u2004';
@@ -45,6 +46,9 @@ function getBasePokerEmbed(account, bet) {
 
 function getResultsEmbed(pokerRound, account) {
     const [result, multiplier, winnings] = pokerRound.scoreHand();
+
+    account.giveGold(winnings);
+    Storage.populateLocalStorage();
 
     return new EmbedBuilder()
         .setColor(account.profileColor)
