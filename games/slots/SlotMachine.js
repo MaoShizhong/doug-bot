@@ -42,10 +42,8 @@ class SlotMachine {
     playSlots(user) {
         const maxPlays = 2;
         const chanceOfRespinInPercent = 80;
-        const lowGoldThreshold = 100000;
 
-        const increasedRates =
-            user.gold < lowGoldThreshold && Math.random < chanceOfRespinInPercent / 100;
+        const increasedRates = user.hasLowGold && Math.random < chanceOfRespinInPercent / 100;
 
         let plays = 0;
 

@@ -119,7 +119,7 @@ function addBetResults(embed, bet, earnings, user) {
             value: `${earnings.toLocaleString('en-US')}${gold}`,
             inline: true,
         },
-        { name: 'Current gold', value: `${user.gold.toLocaleString('en-US')}${gold}` }
+        { name: 'Current gold', value: `${user.gold}${gold}` }
     );
 }
 

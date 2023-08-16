@@ -1,5 +1,7 @@
 # Doug Lloyd
 
+## IMPORTANT - recommended to delete your `users.json` file (or equivalent) from your local storage directory whenever you `git fetch upstream` or equivalent, in case new commits change the User properties structure.
+
 [Discord.js guide](https://discordjs.guide/#before-you-begin)
 
 [Discord.js v14 docs](https://old.discordjs.dev/#/docs/discord.js/14.11.0/general/welcome)
