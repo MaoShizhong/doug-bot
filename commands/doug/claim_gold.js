@@ -18,7 +18,7 @@ module.exports = {
             await interaction.reply({
                 content:
                     `+${User.goldClaimAmount}${gold}! ` +
-                    `You currently have ${user.gold.toLocaleString('en-US')}${gold}\n` +
+                    `You currently have ${user.gold}${gold}\n` +
                     `You may claim ${
                         User.goldClaimAmount
                     }${gold}for free up to once every hour. Your next claim will be available in ${Math.round(
