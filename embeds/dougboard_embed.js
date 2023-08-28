@@ -18,7 +18,7 @@ function getDougBoard() {
     const dougBoard = new EmbedBuilder()
         .setTitle('The Doug Board')
         .setDescription(
-            "Who has been dougged the most?\n% of total messages (counting from 6th July '23) that have been dougged"
+            "Who has been dougged the most?\n% of total messages (counting from 28th August '23 because I'm an idiot) that have been dougged"
         )
         .addFields({ name: '\u200B', value: leaderboard });
 

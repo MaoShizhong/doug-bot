@@ -6,7 +6,7 @@ const { User } = require('../../users/User.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('gold')
-        .setDescription('Claim 500 free gold - cooldown: 60 minutes'),
+        .setDescription(`Claim ${User.goldClaimAmount} free gold - cooldown: 60 minutes`),
     async execute(interaction) {
         const user = User.users.find((user) => user.id === interaction.member.id);
 
@@ -18,7 +18,7 @@ module.exports = {
             await interaction.reply({
                 content:
                     `+${User.goldClaimAmount}${gold}! ` +
-                    `You currently have ${user.gold}${gold}\n` +
+                    `You currently have ${user.goldString}${gold}\n` +
                     `You may claim ${
                         User.goldClaimAmount
                     }${gold}for free up to once every hour. Your next claim will be available in ${Math.round(
