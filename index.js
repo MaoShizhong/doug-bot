@@ -89,6 +89,19 @@ client.on('guildMemberAdd', (member) => {
     Storage.populateLocalStorage();
 });
 
+client.on('guildMemberUpdate', (oldUserDetails, newUserDetails) => {
+    const user = User.users.find((user) => user.id === newUserDetails.id);
+
+    user.name = newUserDetails.nickname;
+    user.avatar = newUserDetails.displayAvatarURL();
+
+    console.log(
+        `ID: ${user.id} has changed their name from ${oldUserDetails.nickname} to ${newUserDetails.nickname} - updating`
+    );
+
+    Storage.populateLocalStorage();
+});
+
 /*
     Loading slash commands
 */
