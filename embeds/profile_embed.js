@@ -14,7 +14,7 @@ function showProfile(id) {
         profile.addFields({
             name: 'Gold',
             value:
-                `${user.gold}${gold}\n` +
+                `${user.goldString}${gold}\n` +
                 `*You have a claim available! Enter \`/gold\` to claim ${User.goldClaimAmount}${gold}*`,
         });
     } else {
@@ -24,7 +24,7 @@ function showProfile(id) {
         profile.addFields({
             name: 'Gold',
             value:
-                `${user.gold}${gold}\n` +
+                `${user.goldString}${gold}\n` +
                 `*Next available gold claim in ${remainingTimeInMins} ${
                     remainingTimeInMins === 1 ? 'minute' : 'minutes'
                 }.*`,

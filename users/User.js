@@ -3,7 +3,7 @@ const { gold } = require('../emojis/general_emojis.js');
 class User {
     static lowGoldThreshold = 100000;
     static goldClaimCooldownInMS = 3600000;
-    static goldClaimAmount = 500;
+    static goldClaimAmount = 250;
     static users = [];
 
     static createUser(member) {
@@ -12,10 +12,6 @@ class User {
         const avatar = member.user.displayAvatarURL();
         User.users.push(new User(name, id, avatar));
     }
-
-    #gold;
-    #totalMessages;
-    #douggedMessages;
 
     constructor(
         name,
@@ -30,43 +26,43 @@ class User {
         this.name = name;
         this.id = id;
         this.avatar = avatar;
-        this.#totalMessages = totalMessages;
-        this.#douggedMessages = douggedMessages;
-        this.#gold = gold;
+        this.totalMessages = totalMessages;
+        this.douggedMessages = douggedMessages;
+        this.gold = gold;
         this.lastGoldClaim = lastGoldClaim;
         this.profileColor = profileColor;
     }
 
-    get gold() {
-        return this.#gold.toLocaleString('en-GB');
+    get goldString() {
+        return this.gold.toLocaleString('en-GB');
     }
 
     get hasLowGold() {
-        return this.#gold < User.lowGoldThreshold;
+        return this.gold < User.lowGoldThreshold;
     }
 
     giveGold(gold) {
-        this.#gold += gold;
+        this.gold += gold;
     }
 
     takeGold(gold) {
-        if (this.#gold >= gold) {
-            this.#gold -= gold;
+        if (this.gold >= gold) {
+            this.gold -= gold;
         } else {
             throw 'Not enough gold!';
         }
     }
 
     increaseTotalMessages() {
-        this.#totalMessages++;
+        this.totalMessages++;
     }
 
     increaseDougMessages() {
-        this.#douggedMessages++;
+        this.douggedMessages++;
     }
 
     get douggedPercentage() {
-        const proportion = this.#totalMessages ? this.#douggedMessages / this.#totalMessages : 0;
+        const proportion = this.totalMessages ? this.douggedMessages / this.totalMessages : 0;
         return proportion === 1
             ? '100.0%'
             : proportion
@@ -87,9 +83,7 @@ class User {
 
     get insufficientGoldMessage() {
         return {
-            content: `Not enough${gold}! You currently have ${this.#gold.toLocaleString(
-                'en-US'
-            )}${gold}`,
+            content: `Not enough${gold}! You currently have ${this.goldString}${gold}`,
             allowedMentions: { repliedUser: false },
         };
     }

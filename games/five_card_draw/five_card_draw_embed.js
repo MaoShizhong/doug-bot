@@ -64,7 +64,7 @@ function getResultsEmbed(pokerRound, account) {
                 value: `${winnings.toLocaleString('en-US')}${gold}`,
                 inline: true,
             },
-            { name: 'Current gold', value: `${account.gold}${gold}` }
+            { name: 'Current gold', value: `${account.goldString}${gold}` }
         );
 }
 
