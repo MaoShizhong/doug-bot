@@ -157,22 +157,21 @@ client.on(Events.InteractionCreate, async (interaction) => {
     Misc. responses to other messages
 */
 client.on('messageCreate', async (msg) => {
+    if (msg.author.bot) return;
+
     msg.content = msg.content.toLowerCase().trim();
 
     const dougID = '1105901074025553990';
 
     const userID = msg.author.id;
-    const humanAccount = User.users.find((user) => user.id === userID);
+    const account = User.users.find((user) => user.id === userID);
+    account.increaseTotalMessages();
 
-    if (humanAccount) {
-        humanAccount.increaseTotalMessages();
-    }
-
-    if (msg.content.startsWith(`<@${dougID}>`) && userID !== dougID) {
+    if (msg.content.startsWith(`<@${dougID}>`)) {
         msg.reply('Did you mean to use `/douggpt` or `/continue`?');
     }
     // AI response - use Babbage
-    else if (/^<@&1105911690396176407>\s.+$/.test(msg.content) && userID !== dougID) {
+    else if (/^<@&1105911690396176407>\s.+$/.test(msg.content)) {
         const message = msg.content.slice(23).trim();
 
         const res = await model.call(message);
@@ -181,10 +180,7 @@ client.on('messageCreate', async (msg) => {
         msg.reply('Did you mean to try `/slots`?');
     } else if (containsDoug(msg.content)) {
         msg.react('1105890013297791036');
-
-        if (humanAccount) {
-            humanAccount.increaseDougMessages();
-        }
+        account.increaseDougMessages();
     } else if (msg.content === 'hello there') {
         msg.channel.send('General Kenobi');
     }
