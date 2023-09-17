@@ -24,7 +24,7 @@ const client = new Client({
     ],
 });
 
-/* 
+/*
     Everything below this point will happen once Doug is live and connected
 */
 client.on('ready', async (client) => {
@@ -40,7 +40,7 @@ client.on('ready', async (client) => {
     let accounts = await guild.members.fetch();
     const humans = accounts.filter((account) => account.user.bot === false);
 
-    /* 
+    /*
         TODO: REFACTOR THIS
     */
     humans.forEach((human) => {
@@ -81,7 +81,7 @@ client.on('guildMemberAdd', (member) => {
         console.log(
             `${member.user.username} (ID: ${member.user.id}) just joined - adding to storage`
         );
-        createUser(member);
+        User.createUser(member);
     } else {
         console.log(member.user.username, 'joined a server that is not liquidDrinkers');
     }
@@ -153,7 +153,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     }
 });
 
-/* 
+/*
     Misc. responses to other messages
 */
 client.on('messageCreate', async (msg) => {

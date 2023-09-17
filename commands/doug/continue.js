@@ -1,7 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { ChatOpenAI } = require('langchain/chat_models/openai');
 const { SystemChatMessage } = require('langchain/schema');
-const chat = new ChatOpenAI({ openAIApiKey: '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', temperature: 0.9 });
+const { openAIKey } = require('../../keys.json');
+
+const chat = new ChatOpenAI({ openAIApiKey: openAIKey, temperature: 0.9 });
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -10,7 +12,9 @@ module.exports = {
         .addStringOption((option) =>
             option.setName('id').setDescription('ID of message to continue from').setRequired(true)
         )
-        .addStringOption((option) => option.setName('prompt').setDescription('Optional additional prompt')),
+        .addStringOption((option) =>
+            option.setName('prompt').setDescription('Optional additional prompt')
+        ),
     async execute(interaction) {
         const msgID = interaction.options.getString('id');
         const prompt = interaction.options.getString('prompt');
@@ -29,7 +33,10 @@ module.exports = {
         await interaction.editReply(
             `Continuing from: https://discord.com/channels/${interaction.guild.id}/${
                 interaction.channel.id
-            }/${msgID}\n${optionalPrompt}\n${response.text.slice(0, 1850 - (prompt ? prompt.length : 0))}`
+            }/${msgID}\n${optionalPrompt}\n${response.text.slice(
+                0,
+                1850 - (prompt ? prompt.length : 0)
+            )}`
         );
     },
 };
