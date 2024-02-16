@@ -1,11 +1,11 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { containsDoug } = require('./utils/react_to_doug.js');
-const { Storage } = require('./local-storage.js');
+const { Storage } = require('../local-storage.js');
 const { User } = require('./users/User.js');
 const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
 const { OpenAI } = require('langchain/llms/openai');
-const { openAIKey, serverIDs } = require('./keys.json');
+const { openAIKey, serverIDs } = require('../keys.json');
 
 require('dotenv').config();
 
