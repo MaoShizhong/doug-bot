@@ -1,5 +1,6 @@
 import { Guild } from 'discord.js';
-import { configDotenv } from 'dotenv';
+import 'dotenv/config';
+import 'log-timestamp';
 import bot from './config/client';
 import initialiseDatabase from './db/db_setup';
 import { executeSlashCommand } from './interactions/slash_command_execution';
@@ -10,7 +11,6 @@ import {
 } from './members/handle_members';
 import { handleIncomingMessage } from './messages/messages';
 
-configDotenv();
 initialiseDatabase();
 
 bot.on('ready', async (client): Promise<void> => {

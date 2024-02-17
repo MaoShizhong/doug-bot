@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import { LLM_TRIGGER, generateLLMResponse } from '../AI/AI';
-import { dougEmoji } from '../helpers/emojis/slots_emojis';
+import { dougEmoji } from '../constants/emojis/slots_emojis';
 import { containsDoug } from './doug_react';
 
 export async function handleIncomingMessage(message: Message): Promise<void> {

@@ -1,4 +1,4 @@
-import { DOUG_REACT_NONGUARANTEED_CHANCE } from '../helpers/constants';
+import { DOUG_REACT_NONGUARANTEED_CHANCE } from '../constants/constants';
 
 /**
  * If a message contains at least one of each `d/o/u/g` then there is a
