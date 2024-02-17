@@ -7,7 +7,7 @@ export function generateGoldString(this: UserModel): string {
 }
 
 export function checkIfLowGold(this: UserModel): boolean {
-    return this.gold < LOW_GOLD_TRHESHOLD;
+    return this.gold as number < LOW_GOLD_TRHESHOLD;
 }
 
 export function calculateDouggedPercentage(this: UserModel): string {
@@ -29,7 +29,7 @@ export function calculateDouggedPercentage(this: UserModel): string {
 
 export function checkGoldClaimAvailability(this: UserModel): boolean {
     const currentTime = Date.now();
-    return currentTime - this.lastGoldClaim >= GOLD_CLAIM_COOLDOWN_MS;
+    return currentTime - (this.lastGoldClaim as number) >= GOLD_CLAIM_COOLDOWN_MS;
 }
 
 export function generateInsufficientGoldMessage(this: UserModel): string {
