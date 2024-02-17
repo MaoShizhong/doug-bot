@@ -62,6 +62,11 @@ export async function updateMemberDetails(
     const { id, username } = newDetails.user;
     const oldName = oldDetails.nickname ?? username;
     const newName = newDetails.nickname ?? username;
+    const oldAvatar = oldDetails.user.displayAvatarURL();
+    const newAvatar = newDetails.user.displayAvatarURL();
+
+    const noRelevantChange = oldName === newName && oldAvatar === newAvatar;
+    if (noRelevantChange) return;
 
     try {
         await User[newDetails.guild.id].findByIdAndUpdate(newDetails.id, {
