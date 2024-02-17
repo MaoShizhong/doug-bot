@@ -1,7 +1,4 @@
 .env
 node_modules
 deploy-commands.js
-keys.json
-doug-id.json
-user_profiles
-history_profiledata
+*.json
