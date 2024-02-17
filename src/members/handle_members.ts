@@ -1,57 +1,85 @@
 import { Guild, GuildMember, PartialGuildMember } from 'discord.js';
+import { User } from '../db/models/User';
+import servers from '../server_IDs.json' with { type: 'json' };
 
+/**
+ * To be run when bot reloads to capture any changes to servers
+ * during the time the bot was inactive.
+ */
 export async function handleServerMemberChanges(server: Guild): Promise<void> {
+    // Only handle servers listed in `server_IDs.json`
+    if (!Object.values(servers).includes(server.id)) return;
+
     let changesMadeToMemberList = false;
     const allAccounts = await server.members.fetch();
     const humanAccounts = allAccounts.filter((account): boolean => !account.user.bot);
+    const existingServerMembers = await User[server.id].find({}).exec();
 
-    // TODO: Get users from DB
-
-    humanAccounts.forEach((account) => {
+    humanAccounts.forEach(async (account): Promise<void> => {
         const { id, username } = account.user;
         const name = account.nickname ?? username;
 
-        // TODO: Add any new server members
-        // if (foo) {
-        //     // ...
-        //     changesMadeToMemberList = true;
-        // }
+        const userInDatabase = existingServerMembers.find((user): boolean => user._id === id);
 
-        // TODO: Update username if necessary
+        if (!userInDatabase) {
+            addMemberToServer(account);
+            changesMadeToMemberList = true;
+        } else if (name !== userInDatabase.name) {
+            await User[server.id].findByIdAndUpdate(id, { name });
+            console.log(`User ${id} name updated to ${name}\n`);
+        }
     });
 
     if (!changesMadeToMemberList) {
-        console.log();
+        console.log(`No changes made to server "${server.name}" whilst this bot was inactive.\n`);
     }
 }
 
 export async function addMemberToServer(member: GuildMember): Promise<void> {
-    // TODO: Handle add server member to DB
-    // if (
-    // !User.users.some((user) => user.id === member.user.id) &&
-    // !member.user.bot &&
-    // member.guild.id === serverIDs.liquidDrinkers
-    // ) {
-    // console.log(
-    // `${member.user.username} (ID: ${member.user.id}) just joined - adding to storage`
-    // );
-    // User.createUser(member);
-    // } else {
-    // console.log(member.user.username, 'joined a server that is not liquidDrinkers');
-    // }
+    const { id, username } = member.user;
+    const serverID = member.guild.id;
+    const serverModel = User[serverID];
+
+    const newUser = new serverModel({
+        _id: id,
+        name: member.nickname ?? username,
+        avatar: member.user.displayAvatarURL(),
+    });
+
+    try {
+        await newUser.save();
+        console.log(`${username} (ID: ${id}) joined server ${serverID} - adding to db\n`);
+    } catch (error) {
+        console.error(`Error creating new user: ${username} - ${id}`);
+        console.error(error, '\n');
+    }
 }
 
 export async function updateMemberDetails(
     oldDetails: GuildMember | PartialGuildMember,
     newDetails: GuildMember
 ): Promise<void> {
-    // TODO: Handle member name update
-    // const user = User.users.find((user) => user.id === newUserDetails.id);
+    const { id, username } = newDetails.user;
+    const oldName = oldDetails.nickname ?? username;
+    const newName = newDetails.nickname ?? username;
+    const oldAvatar = oldDetails.user.displayAvatarURL();
+    const newAvatar = newDetails.user.displayAvatarURL();
 
-    // user.name = newUserDetails.nickname;
-    // user.avatar = newUserDetails.displayAvatarURL();
+    const noRelevantChange = oldName === newName && oldAvatar === newAvatar;
+    if (noRelevantChange) return;
 
-    // console.log(
-    //     `ID: ${user.id} has changed their name from ${oldUserDetails.nickname} to ${newUserDetails.nickname} - updating`
-    // );
+    try {
+        await User[newDetails.guild.id].findByIdAndUpdate(newDetails.id, {
+            name: newName,
+            avatar: newDetails.user.displayAvatarURL(),
+        });
+        console.log(
+            `Updated user "${oldName}" (ID: ${id}) with new name "${newName}" and/or new avatar URL\n`
+        );
+    } catch (error) {
+        console.error(
+            `Error updating user: "${oldName}" (ID: ${id}) with new name "${newName}" or new avatar URL`
+        );
+        console.error(error, '\n');
+    }
 }

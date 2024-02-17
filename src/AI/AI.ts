@@ -13,9 +13,6 @@ const AI_OPTIONS = {
 // Babbage
 const LLM = new OpenAI(AI_OPTIONS);
 
-// GPT 3.5-Turbo
-export const GPT_CLIENT = new ChatOpenAI(AI_OPTIONS);
-
 export async function generateLLMResponse(message: string): Promise<string> {
     // +1 accounts for trailing space between role and message
     const startOfMessageContents = DOUG_ROLE.length + 1;
@@ -23,3 +20,6 @@ export async function generateLLMResponse(message: string): Promise<string> {
 
     return await LLM.invoke(message);
 }
+
+// GPT 3.5-Turbo - exported for use in /douggpt slash command file
+export const GPT_CLIENT = new ChatOpenAI(AI_OPTIONS);
