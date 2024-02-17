@@ -11,7 +11,7 @@ class BotClient extends Client implements IBotClient {
         super(options);
 
         // load slash commands to bot client instance to make them accessible in other files via the `.commands` property
-        const commandsPath = pathJoin(__dirname, 'commands/doug');
+        const commandsPath = pathJoin(__dirname, '..', 'commands/doug');
         const commandFiles = readdirSync(commandsPath).filter((file): boolean =>
             SLASH_COMMAND_FILE_EXTENSIONS.test(file)
         );

@@ -12,6 +12,7 @@
         "allowImportingTsExtensions": true,
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
+        "esModuleInterop": true,
         "isolatedModules": true,
         "noEmit": true,
         "composite": true,
@@ -23,5 +24,6 @@
     },
     "include": [
         "src",
+        "main.ts"
     ],
 }
