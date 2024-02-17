@@ -1,1 +1,2 @@
-export const SLASH_COMMAND_FILE_EXTENSIONS = /\.ts|\.js$/
+export const SLASH_COMMAND_FILE_EXTENSIONS = /\.ts|\.js$/;
+export const DOUG_REACT_NONGUARANTEED_CHANCE = 0.25;
