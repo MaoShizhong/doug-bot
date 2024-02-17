@@ -1,6 +1,7 @@
 import { Message } from 'discord.js';
 import { LLM_TRIGGER, generateLLMResponse } from '../AI/AI';
 import { dougEmoji } from '../constants/emojis/slots_emojis';
+import { User } from '../db/models/User';
 import { containsDoug } from './doug_react';
 
 export async function handleIncomingMessage(message: Message): Promise<void> {
@@ -9,9 +10,8 @@ export async function handleIncomingMessage(message: Message): Promise<void> {
     const messageContent = message.content.toLowerCase().trim();
     const { id: userID } = message.author;
 
-    // TODO: Handle message/dougged message count in db
-    // const account = User.users.find((user) => user.id === userID);
-    // account.increaseTotalMessages();
+    // increase total message count by 1 every message
+    incrementMessageCount(userID, message.guildId as string, 'total');
 
     if (messageContent.startsWith(`<@${process.env.BOT_ID}>`)) {
         message.reply('Did you mean to use `/douggpt` or `/continue`?');
@@ -19,10 +19,20 @@ export async function handleIncomingMessage(message: Message): Promise<void> {
         message.reply('Did you mean to try `/slots`?');
     } else if (containsDoug(messageContent)) {
         message.react(dougEmoji);
-        // account.increaseDougMessages();
+        incrementMessageCount(userID, message.guildId as string, 'dougged');
     } else if (messageContent === 'hello there') {
-        message.channel.send('General Kenobi');
+        message.reply('General Kenobi');
     } else if (LLM_TRIGGER.test(messageContent)) {
         message.reply(await generateLLMResponse(messageContent));
     }
+}
+
+async function incrementMessageCount(
+    userID: string,
+    guildID: string,
+    messageProperty: 'total' | 'dougged'
+): Promise<void> {
+    await User[guildID].findByIdAndUpdate(userID, {
+        $inc: { [`messages.${messageProperty}`]: 1 },
+    });
 }
