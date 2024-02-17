@@ -33,9 +33,9 @@ for (const folder of commandFolders) {
 }
 
 // Construct and prepare an instance of the REST module
-const { CLIENT_ID, BOT_TOKEN } = process.env;
+const { BOT_ID, BOT_TOKEN } = process.env;
 
-if (!CLIENT_ID || !BOT_TOKEN) throw new Error('No client ID or bot token!');
+if (!BOT_ID || !BOT_TOKEN) throw new Error('No client ID or bot token!');
 
 const rest = new REST().setToken(BOT_TOKEN);
 
@@ -45,7 +45,7 @@ const rest = new REST().setToken(BOT_TOKEN);
         console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
         // The put method is used to fully refresh all commands globally
-        const data = (await rest.put(Routes.applicationCommands(CLIENT_ID), {
+        const data = (await rest.put(Routes.applicationCommands(BOT_ID), {
             body: commands,
         })) as unknown[];
 
