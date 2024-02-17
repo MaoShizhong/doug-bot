@@ -30,7 +30,7 @@ type UserModel = {
     };
 } & UserVirtuals;
 
-const serverModels: { [key: string]: Model<UserModel> } = {};
+const User: { [key: string]: Model<UserModel> } = {};
 
 for (const [serverName, serverID] of Object.entries(servers)) {
     const UserSchema = new Schema<UserModel>(
@@ -55,7 +55,7 @@ for (const [serverName, serverID] of Object.entries(servers)) {
     UserSchema.virtual('canClaimGold').get(checkGoldClaimAvailability);
     UserSchema.virtual('insufficientGoldMessage').get(generateInsufficientGoldMessage);
 
-    serverModels[serverID] = model<UserModel>(serverName, UserSchema);
+    User[serverID] = model<UserModel>(serverName, UserSchema);
 }
 
-export { serverModels, type UserModel };
+export { User, type UserModel };
