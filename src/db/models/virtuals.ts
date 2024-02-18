@@ -14,8 +14,6 @@ export function calculateDouggedPercentage(this: UserModel): string {
     const { total, dougged } = this.messages;
     const proportion = total ? dougged / total : 0;
 
-    console.log(total, dougged, this.messages, this);
-
     return proportion === 1
         ? '100.0%'
         : proportion

@@ -1,6 +1,6 @@
 import { Guild, GuildMember, PartialGuildMember } from 'discord.js';
 import { User } from '../db/models/User.js';
-import servers from '../server_IDs.json' with { type: 'json' };
+import servers from '../server_IDs.json' assert { type: 'json' };
 
 /**
  * To be run when bot reloads to capture any changes to servers
