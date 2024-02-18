@@ -24,22 +24,20 @@ const command: SlashCommand = {
             return;
         }
 
-        if (bet) {
-            try {
-                (user.gold as number) -= bet;
-
-                await interaction.reply({
-                    embeds: [new SlotMachine().getSlotsResults(true, bet, user)],
-                    allowedMentions: { repliedUser: false },
-                });
-            } catch {
-                await interaction.reply(user.insufficientGoldMessage);
-            }
+        if (bet && (user.gold as number) < bet) {
+            await interaction.reply(user.insufficientGoldMessage);
         } else {
-            await interaction.reply({
-                embeds: [new SlotMachine().getSlotsResults(false, 0, user)],
-                allowedMentions: { repliedUser: false },
-            });
+            (user.gold as number) -= bet ?? 0;
+            const slotMachine = new SlotMachine(user, bet);
+            const resultsEmbed = slotMachine.getSlotsResults();
+
+            await Promise.all([
+                user.save(),
+                interaction.reply({
+                    embeds: [resultsEmbed],
+                    allowedMentions: { repliedUser: false },
+                }),
+            ]);
         }
     },
 };
