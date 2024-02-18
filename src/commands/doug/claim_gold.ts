@@ -1,32 +1,44 @@
-import { SlashCommandBuilder } from 'discord.js';
-import { gold } from '../../constants/emojis/general_emojis.js';
+import { GuildMember, SlashCommandBuilder } from 'discord.js';
+import { GOLD_CLAIM_AMOUNT, GOLD_CLAIM_COOLDOWN_MS } from '../../constants/constants';
+import { gold } from '../../constants/emojis/general_emojis';
+import { User } from '../../db/models/User';
+import { SlashCommand } from '../../types';
 
-export default {
+const command: SlashCommand = {
     data: new SlashCommandBuilder()
         .setName('gold')
-        .setDescription(`Claim ${User.goldClaimAmount} free gold - cooldown: 60 minutes`),
-    async execute(interaction) {
-        const user = User.users.find((user) => user.id === interaction.member.id);
+        .setDescription(`Claim ${GOLD_CLAIM_AMOUNT} free gold - cooldown: 60 minutes`),
+    async execute(interaction): Promise<void> {
+        const interactionUser = interaction.member as GuildMember;
+        const UserInServer = User[interaction.guildId as string];
+        const user = await UserInServer.findById(interactionUser.id).exec();
 
-        if (user.hasGoldClaimAvailable) {
-            user.giveGold(User.goldClaimAmount);
+        if (!user) {
+            console.error(`Invalid user ID ${interactionUser.id} - not found in DB`);
+            return;
+        }
+
+        if (user.canClaimGold) {
+            (user.gold as number) += GOLD_CLAIM_AMOUNT;
             user.lastGoldClaim = Date.now();
-            Storage.populateLocalStorage();
 
-            await interaction.reply({
-                content:
-                    `+${User.goldClaimAmount}${gold}! ` +
-                    `You currently have ${user.goldString}${gold}\n` +
-                    `You may claim ${
-                        User.goldClaimAmount
-                    }${gold}for free up to once every hour. Your next claim will be available in ${Math.round(
-                        User.goldClaimCooldownInMS / 60000
-                    )} minutes.`,
-                allowedMentions: { repliedUser: false },
-            });
+            await Promise.all([
+                user.save(),
+                interaction.reply({
+                    content:
+                        `+${User.goldClaimAmount}${gold}! ` +
+                        `You currently have ${user.goldString}${gold}\n` +
+                        `You may claim ${
+                            User.goldClaimAmount
+                        }${gold}for free up to once every hour. Your next claim will be available in ${Math.round(
+                            GOLD_CLAIM_COOLDOWN_MS / 60000
+                        )} minutes.`,
+                    allowedMentions: { repliedUser: false },
+                }),
+            ]);
         } else {
-            const remainingTimeInMS = Date.now() - user.lastGoldClaim;
-            const remainingTimeInMins = 60 - ~~(remainingTimeInMS / 60000);
+            const remainingTimeInMS = Date.now() - (user.lastGoldClaim as number);
+            const remainingTimeInMins = 60 - Math.floor(remainingTimeInMS / 60000);
 
             await interaction.reply({
                 content: `Sorry, you have already claimed ${gold} within the last hour! You may claim again in ${remainingTimeInMins} ${
@@ -37,3 +49,5 @@ export default {
         }
     },
 };
+
+export default command;

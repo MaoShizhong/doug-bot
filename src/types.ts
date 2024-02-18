@@ -1,8 +1,8 @@
-import { Client, Collection, Interaction, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, Client, Collection, SlashCommandBuilder } from 'discord.js';
 
 export type SlashCommand = {
-    data: SlashCommandBuilder;
-    execute: (interaction: Interaction) => Promise<void>;
+    data: SlashCommandBuilder | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
+    execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
 };
 
 export interface IBotClient extends Client {

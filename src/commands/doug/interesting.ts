@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js';
+import { SlashCommand } from '../../types';
 
-export default {
+const command: SlashCommand = {
     data: new SlashCommandBuilder()
         .setName('interesting')
         .setDescription('Really interesting Harvard facts!'),
@@ -12,3 +13,5 @@ export default {
         });
     },
 };
+
+export default command;

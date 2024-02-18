@@ -1,8 +1,10 @@
-import { SlashCommandBuilder } from 'discord.js';
-import { FiveCardDraw } from '../../games/five_card_draw/PokerController.js';
-import { poker } from '../../games/five_card_draw/five_card_draw_embed.js';
+import { GuildMember, SlashCommandBuilder } from 'discord.js';
+import { User } from '../../db/models/User';
+import { FiveCardDraw } from '../../games/five_card_draw/PokerController';
+import { poker } from '../../games/five_card_draw/five_card_draw_embed';
+import { SlashCommand } from '../../types';
 
-export default {
+const command: SlashCommand = {
     data: new SlashCommandBuilder()
         .setName('poker')
         .setDescription('Try your luck at 5 card draw!')
@@ -14,16 +16,22 @@ export default {
                 .setMaxValue(5000)
                 .setRequired(true)
         ),
-    async execute(interaction) {
-        const account = User.users.find((user) => user.id === interaction.member.id);
-        const bet = interaction.options.getInteger('bet');
+    async execute(interaction): Promise<void> {
+        const interactionUser = interaction.member as GuildMember;
+        const user = await User[interaction.guildId as string].findById(interactionUser.id).exec();
+        const bet = interaction.options.getInteger('bet')!;
+
+        if (!user) {
+            await interaction.reply({ content: `Could not find user ID ${interactionUser.id}.` });
+            return;
+        }
 
         try {
-            account.takeGold(bet);
+            (user.gold as number) -= bet;
             const pokerRound = new FiveCardDraw(bet);
 
             await interaction.reply({
-                embeds: [poker.getBasePokerEmbed(account, bet)],
+                embeds: [poker.getBasePokerEmbed(user, bet)],
 
                 allowedMentions: { repliedUser: false },
             });
@@ -37,33 +45,28 @@ export default {
             */
             await interaction
                 .followUp({
-                    content: `For ${account.name} - initial hand:\n\n${handDisplay}`,
+                    content: `For ${user.name} - initial hand:\n\n${handDisplay}`,
                     fetchReply: true,
                 })
-                .then((message) => {
-                    hand.slice(1).forEach((card) => {
+                .then((message): void => {
+                    hand.slice(1).forEach((card): void => {
                         handDisplay += card;
                         message.edit({
-                            content: `For ${account.name} - initial hand:\n\n${handDisplay}`,
+                            content: `For ${user.name} - initial hand:\n\n${handDisplay}`,
                         });
                     });
-                    collectReactionsAndRedrawHand(message, account, pokerRound);
+                    collectReactionsAndRedrawHand(message, user, pokerRound);
                 });
-
-            Storage.populateLocalStorage();
-        } catch (e) {
-            console.log(e);
-            return await interaction.reply(account.insufficientGoldMessage);
+        } catch {
+            await interaction.reply(user.insufficientGoldMessage);
         }
     },
 };
 
-function collectReactionsAndRedrawHand(message, account, pokerRound) {
+function collectReactionsAndRedrawHand(message, account, pokerRound): void {
     const validReactions = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '✅'];
 
-    /*
-        Only accept the active player's reactions (and only valid reactions)
-    */
+    // Only accept the active player's reactions (and only valid reactions)
     const collectorFilter = (reaction, user) => {
         return user.id === account.id && validReactions.includes(reaction.emoji.name);
     };
@@ -96,8 +99,8 @@ function collectReactionsAndRedrawHand(message, account, pokerRound) {
 
                 fetchReply: true,
             })
-            .then((message) => {
-                hand.slice(1).forEach((card) => {
+            .then((message): void => {
+                hand.slice(1).forEach((card): void => {
                     handDisplay += card;
                     message.edit({
                         content: `For <@${account.id}> - after redrawing:\n\n${handDisplay}`,
@@ -115,3 +118,5 @@ function collectReactionsAndRedrawHand(message, account, pokerRound) {
     // only react once the ReactionCollector has been created
     validReactions.forEach((emoji) => message.react(emoji));
 }
+
+export default command;
