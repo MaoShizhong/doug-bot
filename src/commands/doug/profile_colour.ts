@@ -1,8 +1,6 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { User } = require('../../users/User.js');
-const { Storage } = require('../../local-storage.js');
+import { SlashCommandBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
         .setName('profilecolor')
         .setDescription('Set profile colour')

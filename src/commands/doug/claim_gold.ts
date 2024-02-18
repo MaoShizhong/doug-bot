@@ -1,9 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { gold } = require('../../emojis/general_emojis.js');
-const { Storage } = require('../../local-storage.js');
-const { User } = require('../../users/User.js');
+import { SlashCommandBuilder } from 'discord.js';
+import { gold } from '../../constants/emojis/general_emojis.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
         .setName('gold')
         .setDescription(`Claim ${User.goldClaimAmount} free gold - cooldown: 60 minutes`),

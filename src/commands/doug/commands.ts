@@ -1,7 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { getCommandsEmbedPage, helpOne } = require('../../embeds/commands_embeds.js');
+import { SlashCommandBuilder } from 'discord.js';
+import { commandsEmbeds, getCommandsEmbedPage } from '../../embeds/commands_embeds.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder().setName('commands').setDescription('Show a list of commands'),
     async execute(interaction) {
         await interaction.reply({ embeds: [helpOne] });

@@ -1,6 +1,6 @@
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder().setName('data').setDescription("Don't ask to ask!"),
     async execute(interaction) {
         await interaction.reply({

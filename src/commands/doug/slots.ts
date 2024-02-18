@@ -1,9 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { User } = require('../../users/User.js');
-const { Storage } = require('../../local-storage.js');
-const { SlotMachine } = require('../../games/slots/SlotMachine.js');
+import { SlashCommandBuilder } from 'discord.js';
+import { SlotMachine } from '../../games/slots/SlotMachine.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
         .setName('slots')
         .setDescription('Try your luck at the slots!')
