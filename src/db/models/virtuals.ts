@@ -7,12 +7,14 @@ export function generateGoldString(this: UserModel): string {
 }
 
 export function checkIfLowGold(this: UserModel): boolean {
-    return this.gold as number < LOW_GOLD_TRHESHOLD;
+    return Number(this.gold) < LOW_GOLD_TRHESHOLD;
 }
 
 export function calculateDouggedPercentage(this: UserModel): string {
     const { total, dougged } = this.messages;
     const proportion = total ? dougged / total : 0;
+
+    console.log(total, dougged, this.messages, this);
 
     return proportion === 1
         ? '100.0%'
@@ -29,7 +31,7 @@ export function calculateDouggedPercentage(this: UserModel): string {
 
 export function checkGoldClaimAvailability(this: UserModel): boolean {
     const currentTime = Date.now();
-    return currentTime - (this.lastGoldClaim as number) >= GOLD_CLAIM_COOLDOWN_MS;
+    return currentTime - Number(this.lastGoldClaim) >= GOLD_CLAIM_COOLDOWN_MS;
 }
 
 export function generateInsufficientGoldMessage(this: UserModel): string {

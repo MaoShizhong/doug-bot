@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import { LLM_TRIGGER, generateLLMResponse } from '../AI/AI';
+import { LLM_TRIGGER, generateLLMResponse } from '../config/AI';
 import { dougEmoji } from '../constants/emojis/slots_emojis';
 import { User } from '../db/models/User';
 import { containsDoug } from './doug_react';
