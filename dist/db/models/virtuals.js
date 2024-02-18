@@ -1,5 +1,5 @@
-import { GOLD_CLAIM_COOLDOWN_MS, LOW_GOLD_TRHESHOLD } from '../../constants/constants';
-import { gold } from '../../constants/emojis/general_emojis';
+import { GOLD_CLAIM_COOLDOWN_MS, LOW_GOLD_TRHESHOLD } from '../../constants/constants.js';
+import { gold } from '../../constants/emojis/general_emojis.js';
 export function generateGoldString() {
     return this.gold.toLocaleString('en-GB');
 }

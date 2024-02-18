@@ -1,5 +1,5 @@
 import { EmbedBuilder } from 'discord.js';
-import { User } from '../db/models/User';
+import { User } from '../db/models/User.js';
 export async function getDougBoard(guildID) {
     const users = await User[guildID].find({}).select('name messages').exec();
     const sortedUsersByDougDesc = users.sort((userA, userB) => {

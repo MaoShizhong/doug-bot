@@ -3,8 +3,8 @@ import {
     CommandsEmbedPage,
     commandsEmbeds,
     getCommandsEmbedPage,
-} from '../../embeds/commands_embeds';
-import { SlashCommand } from '../../types';
+} from '../../embeds/commands_embeds.js';
+import { SlashCommand } from '../../types.js';
 
 const command: SlashCommand = {
     data: new SlashCommandBuilder().setName('commands').setDescription('Show a list of commands'),

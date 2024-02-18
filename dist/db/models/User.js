@@ -1,8 +1,8 @@
 import mongoose, { Schema, model } from 'mongoose';
 import mongooseLong from 'mongoose-long';
-import { STARTING_GOLD } from '../../constants/constants';
+import { STARTING_GOLD } from '../../constants/constants.js';
 import servers from '../../server_IDs.json' with { type: 'json' };
-import { calculateDouggedPercentage, checkGoldClaimAvailability, checkIfLowGold, generateGoldString, generateInsufficientGoldMessage, } from './virtuals';
+import { calculateDouggedPercentage, checkGoldClaimAvailability, checkIfLowGold, generateGoldString, generateInsufficientGoldMessage, } from './virtuals.js';
 mongooseLong(mongoose);
 const User = {};
 // Make separate collection for each server the bot is in

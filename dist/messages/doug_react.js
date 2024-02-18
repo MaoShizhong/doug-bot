@@ -1,4 +1,4 @@
-import { DOUG_REACT_NONGUARANTEED_CHANCE } from '../constants/constants';
+import { DOUG_REACT_NONGUARANTEED_CHANCE } from '../constants/constants.js';
 /**
  * If a message contains at least one of each `d/o/u/g` then there is a
  * small chance that the bot reacts with a doug emoji.

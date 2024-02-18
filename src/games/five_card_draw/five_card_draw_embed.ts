@@ -1,8 +1,8 @@
 import { EmbedBuilder } from 'discord.js';
-import { gold } from '../../constants/emojis/general_emojis';
-import { UserModel } from '../../db/models/User';
-import { FiveCardDraw } from './PokerController';
-import { PokerScorer } from './PokerScorer';
+import { gold } from '../../constants/emojis/general_emojis.js';
+import { UserModel } from '../../db/models/User.js';
+import { FiveCardDraw } from './PokerController.js';
+import { PokerScorer } from './PokerScorer.js';
 
 export function getBasePokerEmbed(color: number, bet: number): EmbedBuilder {
     const space = '\u2004\u2004';

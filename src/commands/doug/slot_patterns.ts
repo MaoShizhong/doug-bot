@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { image, patterns } from '../../embeds/slot_patterns_embed';
-import { SlashCommand } from '../../types';
+import { image, patterns } from '../../embeds/slot_patterns_embed.js';
+import { SlashCommand } from '../../types.js';
 
 const command: SlashCommand = {
     data: new SlashCommandBuilder()

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { getDougBoard } from '../../embeds/dougboard_embed';
+import { getDougBoard } from '../../embeds/dougboard_embed.js';
 const command = {
     data: new SlashCommandBuilder()
         .setName('dougboard')

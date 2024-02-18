@@ -1,10 +1,10 @@
 import 'dotenv/config';
 import 'log-timestamp';
-import bot from './config/client';
-import initialiseDatabase from './db/db_setup';
-import { executeSlashCommand } from './interactions/slash_command_execution';
-import { addMemberToServer, handleServerMemberChanges, updateMemberDetails, } from './members/handle_members';
-import { handleIncomingMessage } from './messages/messages';
+import bot from './config/client.js';
+import initialiseDatabase from './db/db_setup.js';
+import { executeSlashCommand } from './interactions/slash_command_execution.js';
+import { addMemberToServer, handleServerMemberChanges, updateMemberDetails, } from './members/handle_members.js';
+import { handleIncomingMessage } from './messages/messages.js';
 initialiseDatabase();
 bot.on('ready', async (client) => {
     console.log('\n------------------');

@@ -1,4 +1,4 @@
-import { User } from '../db/models/User';
+import { User } from '../db/models/User.js';
 import servers from '../server_IDs.json' with { type: 'json' };
 /**
  * To be run when bot reloads to capture any changes to servers

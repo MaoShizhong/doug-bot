@@ -2,9 +2,9 @@ import { REST, RESTPostAPIChatInputApplicationCommandsJSONBody, Routes } from 'd
 import 'dotenv/config';
 import { readdirSync } from 'fs';
 import { join as pathJoin } from 'path';
-import { SLASH_COMMAND_FILE_EXTENSIONS } from './constants/constants';
-import { SlashCommand } from './types';
-import { getDirName } from './util/dirname';
+import { SLASH_COMMAND_FILE_EXTENSIONS } from './constants/constants.js';
+import { SlashCommand } from './types.js';
+import { getDirName } from './util/dirname.js';
 
 const commands: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
 

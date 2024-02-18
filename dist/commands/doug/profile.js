@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { showProfile } from '../../embeds/profile_embed';
+import { showProfile } from '../../embeds/profile_embed.js';
 const command = {
     data: new SlashCommandBuilder()
         .setName('showprofile')

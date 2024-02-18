@@ -1,6 +1,6 @@
 import { GuildMember, SlashCommandBuilder } from 'discord.js';
-import { User } from '../../db/models/User';
-import { SlashCommand } from '../../types';
+import { User } from '../../db/models/User.js';
+import { SlashCommand } from '../../types.js';
 
 const command: SlashCommand = {
     data: new SlashCommandBuilder()

@@ -1,5 +1,5 @@
 import { BaseInteraction } from 'discord.js';
-import { IBotClient } from '../types';
+import { IBotClient } from '../types.js';
 
 export async function executeSlashCommand(interaction: BaseInteraction): Promise<void> {
     // slash commands only

@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, } from 'discord.js';
-import { User } from '../../db/models/User';
-import { FiveCardDraw } from '../../games/five_card_draw/PokerController';
-import { getBasePokerEmbed, getHandDisplay, getResultsEmbed, } from '../../games/five_card_draw/five_card_draw_embed';
+import { User } from '../../db/models/User.js';
+import { FiveCardDraw } from '../../games/five_card_draw/PokerController.js';
+import { getBasePokerEmbed, getHandDisplay, getResultsEmbed, } from '../../games/five_card_draw/five_card_draw_embed.js';
 const command = {
     data: new SlashCommandBuilder()
         .setName('poker')

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { commandsEmbeds } from '../../embeds/commands_embeds';
+import { commandsEmbeds } from '../../embeds/commands_embeds.js';
 const command = {
     data: new SlashCommandBuilder()
         .setName('setnewcommandsembed')

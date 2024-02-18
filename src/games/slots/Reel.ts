@@ -8,8 +8,8 @@ import {
     rickroll,
     rip,
     scratch,
-} from '../../constants/emojis/slots_emojis';
-import { SlotEmoji } from '../../types';
+} from '../../constants/emojis/slots_emojis.js';
+import { SlotEmoji } from '../../types.js';
 
 export class Reel {
     static match5 = {

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { commandsEmbeds, getCommandsEmbedPage, } from '../../embeds/commands_embeds';
+import { commandsEmbeds, getCommandsEmbedPage, } from '../../embeds/commands_embeds.js';
 const command = {
     data: new SlashCommandBuilder().setName('commands').setDescription('Show a list of commands'),
     async execute(interaction) {

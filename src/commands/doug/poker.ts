@@ -6,14 +6,14 @@ import {
     SlashCommandBuilder,
     type User as DiscordUser,
 } from 'discord.js';
-import { User, UserModel } from '../../db/models/User';
-import { FiveCardDraw } from '../../games/five_card_draw/PokerController';
+import { User, UserModel } from '../../db/models/User.js';
+import { FiveCardDraw } from '../../games/five_card_draw/PokerController.js';
 import {
     getBasePokerEmbed,
     getHandDisplay,
     getResultsEmbed,
-} from '../../games/five_card_draw/five_card_draw_embed';
-import { SlashCommand } from '../../types';
+} from '../../games/five_card_draw/five_card_draw_embed.js';
+import { SlashCommand } from '../../types.js';
 
 const command: SlashCommand = {
     data: new SlashCommandBuilder()

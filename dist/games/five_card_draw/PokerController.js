@@ -1,5 +1,5 @@
-import playingCards from '../../constants/emojis/play_card_emojis';
-import { PokerScorer } from './PokerScorer';
+import playingCards from '../../constants/emojis/play_card_emojis.js';
+import { PokerScorer } from './PokerScorer.js';
 // Ace given value of 14 since ace is high - easier checking for royal flush
 const CARD_VALUES = [14, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 const SUITS = ['diamonds', 'clubs', 'hearts', 'spades'];

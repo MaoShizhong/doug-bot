@@ -1,6 +1,6 @@
 import { AttachmentBuilder, EmbedBuilder } from 'discord.js';
 import { join as pathJoin } from 'path';
-import { getDirName } from '../util/dirname';
+import { getDirName } from '../util/dirname.js';
 
 export const image = new AttachmentBuilder(
     pathJoin(getDirName(import.meta.url), '..', 'images/slotpatterns.png')

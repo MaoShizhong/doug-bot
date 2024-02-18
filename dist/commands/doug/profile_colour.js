@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { User } from '../../db/models/User';
+import { User } from '../../db/models/User.js';
 const command = {
     data: new SlashCommandBuilder()
         .setName('profilecolor')

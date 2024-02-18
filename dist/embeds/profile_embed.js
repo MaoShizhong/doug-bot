@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
-import { GOLD_CLAIM_AMOUNT } from '../constants/constants';
-import { gold } from '../constants/emojis/general_emojis';
-import { User } from '../db/models/User';
+import { GOLD_CLAIM_AMOUNT } from '../constants/constants.js';
+import { gold } from '../constants/emojis/general_emojis.js';
+import { User } from '../db/models/User.js';
 export async function showProfile(userID, guildID) {
     const user = await User[guildID].findById(userID).exec();
     if (!user) {

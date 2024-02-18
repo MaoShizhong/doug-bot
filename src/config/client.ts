@@ -1,9 +1,9 @@
 import { Client, ClientOptions, Collection, GatewayIntentBits } from 'discord.js';
 import { readdirSync } from 'fs';
 import { join as pathJoin } from 'path';
-import { SLASH_COMMAND_FILE_EXTENSIONS } from '../constants/constants';
-import { IBotClient, SlashCommand } from '../types';
-import { getDirName } from '../util/dirname';
+import { SLASH_COMMAND_FILE_EXTENSIONS } from '../constants/constants.js';
+import { IBotClient, SlashCommand } from '../types.js';
+import { getDirName } from '../util/dirname.js';
 
 class BotClient extends Client implements IBotClient {
     commands = new Collection<string, SlashCommand>();

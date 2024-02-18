@@ -1,10 +1,10 @@
 import { EmbedBuilder } from 'discord.js';
-import { LUCKY_STAR_CHANCE } from '../../constants/constants';
-import { UserModel } from '../../db/models/User';
-import { SlotEmoji } from '../../types';
-import { Reel } from './Reel';
-import { Scorer } from './Scorer';
-import { addBetResultsToEmbed, getInitialSlotsEmbed } from './slots_embed';
+import { LUCKY_STAR_CHANCE } from '../../constants/constants.js';
+import { UserModel } from '../../db/models/User.js';
+import { SlotEmoji } from '../../types.js';
+import { Reel } from './Reel.js';
+import { Scorer } from './Scorer.js';
+import { addBetResultsToEmbed, getInitialSlotsEmbed } from './slots_embed.js';
 
 export class SlotMachine {
     NUMBER_OF_REELS: number;

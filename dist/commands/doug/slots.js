@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { User } from '../../db/models/User';
-import { SlotMachine } from '../../games/slots/SlotMachine';
+import { User } from '../../db/models/User.js';
+import { SlotMachine } from '../../games/slots/SlotMachine.js';
 const command = {
     data: new SlashCommandBuilder()
         .setName('slots')

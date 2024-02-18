@@ -1,6 +1,6 @@
 import { APIEmbed, SlashCommandBuilder } from 'discord.js';
-import { getDougBoard } from '../../embeds/dougboard_embed';
-import { SlashCommand } from '../../types';
+import { getDougBoard } from '../../embeds/dougboard_embed.js';
+import { SlashCommand } from '../../types.js';
 
 const command: SlashCommand = {
     data: new SlashCommandBuilder()

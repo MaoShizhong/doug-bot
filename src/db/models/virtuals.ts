@@ -1,6 +1,6 @@
-import { GOLD_CLAIM_COOLDOWN_MS, LOW_GOLD_TRHESHOLD } from '../../constants/constants';
-import { gold } from '../../constants/emojis/general_emojis';
-import { type UserModel } from './User';
+import { GOLD_CLAIM_COOLDOWN_MS, LOW_GOLD_TRHESHOLD } from '../../constants/constants.js';
+import { gold } from '../../constants/emojis/general_emojis.js';
+import { type UserModel } from './User.js';
 
 export function generateGoldString(this: UserModel): string {
     return this.gold.toLocaleString('en-GB');

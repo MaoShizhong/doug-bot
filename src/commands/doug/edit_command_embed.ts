@@ -1,6 +1,6 @@
 import { GuildMember, SlashCommandBuilder } from 'discord.js';
-import { commandsEmbeds } from '../../embeds/commands_embeds';
-import { SlashCommand } from '../../types';
+import { commandsEmbeds } from '../../embeds/commands_embeds.js';
+import { SlashCommand } from '../../types.js';
 
 const command: SlashCommand = {
     data: new SlashCommandBuilder()

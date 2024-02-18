@@ -1,8 +1,8 @@
 import { Message } from 'discord.js';
-import { LLM_TRIGGER, generateLLMResponse } from '../config/AI';
-import { dougEmoji } from '../constants/emojis/slots_emojis';
-import { User } from '../db/models/User';
-import { containsDoug } from './doug_react';
+import { LLM_TRIGGER, generateLLMResponse } from '../config/AI.js';
+import { dougEmoji } from '../constants/emojis/slots_emojis.js';
+import { User } from '../db/models/User.js';
+import { containsDoug } from './doug_react.js';
 
 export async function handleIncomingMessage(message: Message): Promise<void> {
     if (message.author.bot) return;

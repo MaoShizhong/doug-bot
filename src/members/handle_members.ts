@@ -1,5 +1,5 @@
 import { Guild, GuildMember, PartialGuildMember } from 'discord.js';
-import { User } from '../db/models/User';
+import { User } from '../db/models/User.js';
 import servers from '../server_IDs.json' with { type: 'json' };
 
 /**

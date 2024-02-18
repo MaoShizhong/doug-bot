@@ -1,4 +1,4 @@
-import { SlotEmoji } from '../../types';
+import { SlotEmoji } from '../../types.js';
 
 export type Match = keyof Pick<SlotEmoji, 'match3' | 'match4' | 'match5'>;
 export type MatchInfo = [SlotEmoji[], string];

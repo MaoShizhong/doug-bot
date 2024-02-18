@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { GOLD_CLAIM_AMOUNT, GOLD_CLAIM_COOLDOWN_MS } from '../../constants/constants';
-import { gold } from '../../constants/emojis/general_emojis';
-import { User } from '../../db/models/User';
+import { GOLD_CLAIM_AMOUNT, GOLD_CLAIM_COOLDOWN_MS } from '../../constants/constants.js';
+import { gold } from '../../constants/emojis/general_emojis.js';
+import { User } from '../../db/models/User.js';
 const command = {
     data: new SlashCommandBuilder()
         .setName('gold')

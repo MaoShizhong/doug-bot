@@ -1,6 +1,6 @@
 import { EmbedBuilder } from 'discord.js';
-import { GOLD_CLAIM_AMOUNT } from '../constants/constants';
-import { gold } from '../constants/emojis/general_emojis';
+import { GOLD_CLAIM_AMOUNT } from '../constants/constants.js';
+import { gold } from '../constants/emojis/general_emojis.js';
 
 export const commandsEmbeds = {
     1: new EmbedBuilder()

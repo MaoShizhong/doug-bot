@@ -1,5 +1,5 @@
 import { EmbedBuilder } from 'discord.js';
-import { gold } from '../../constants/emojis/general_emojis';
+import { gold } from '../../constants/emojis/general_emojis.js';
 import {
     arthur,
     barFalse,
@@ -10,10 +10,10 @@ import {
     rickroll,
     rip,
     scratch,
-} from '../../constants/emojis/slots_emojis';
-import { UserModel } from '../../db/models/User';
-import { SlotEmoji } from '../../types';
-import { Match, MatchInfo } from './Scorer';
+} from '../../constants/emojis/slots_emojis.js';
+import { UserModel } from '../../db/models/User.js';
+import { SlotEmoji } from '../../types.js';
+import { Match, MatchInfo } from './Scorer.js';
 
 function renderReels(reels: SlotEmoji[][]): string {
     const space = '\u2004\u2004';

@@ -1,6 +1,6 @@
 import { EmbedBuilder } from 'discord.js';
-import { gold } from '../../constants/emojis/general_emojis';
-import { PokerScorer } from './PokerScorer';
+import { gold } from '../../constants/emojis/general_emojis.js';
+import { PokerScorer } from './PokerScorer.js';
 export function getBasePokerEmbed(color, bet) {
     const space = '\u2004\u2004';
     return new EmbedBuilder()

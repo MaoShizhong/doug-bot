@@ -1,4 +1,4 @@
-import { CardValue, Suit, type Card } from './PokerController';
+import { CardValue, Suit, type Card } from './PokerController.js';
 
 export class PokerScorer {
     static multipliers = {

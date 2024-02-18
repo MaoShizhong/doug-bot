@@ -1,4 +1,4 @@
-import { arthur, barFalse, barTrue, doug, liquidDrinkers, python, rickroll, rip, scratch, } from '../../constants/emojis/slots_emojis';
+import { arthur, barFalse, barTrue, doug, liquidDrinkers, python, rickroll, rip, scratch, } from '../../constants/emojis/slots_emojis.js';
 export class Reel {
     static match5 = {
         common: 15,

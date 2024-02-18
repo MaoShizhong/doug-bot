@@ -1,6 +1,6 @@
 import mongoose, { Schema, model, type Model } from 'mongoose';
 import mongooseLong from 'mongoose-long';
-import { STARTING_GOLD } from '../../constants/constants';
+import { STARTING_GOLD } from '../../constants/constants.js';
 import servers from '../../server_IDs.json' with { type: 'json' };
 import {
     calculateDouggedPercentage,
@@ -8,7 +8,7 @@ import {
     checkIfLowGold,
     generateGoldString,
     generateInsufficientGoldMessage,
-} from './virtuals';
+} from './virtuals.js';
 
 mongooseLong(mongoose);
 

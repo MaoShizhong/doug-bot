@@ -1,7 +1,7 @@
-import { LUCKY_STAR_CHANCE } from '../../constants/constants';
-import { Reel } from './Reel';
-import { Scorer } from './Scorer';
-import { addBetResultsToEmbed, getInitialSlotsEmbed } from './slots_embed';
+import { LUCKY_STAR_CHANCE } from '../../constants/constants.js';
+import { Reel } from './Reel.js';
+import { Scorer } from './Scorer.js';
+import { addBetResultsToEmbed, getInitialSlotsEmbed } from './slots_embed.js';
 export class SlotMachine {
     NUMBER_OF_REELS;
     EMOJIS_PER_REEL;

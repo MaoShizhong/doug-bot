@@ -1,6 +1,6 @@
 import { EmbedBuilder } from 'discord.js';
-import { gold } from '../../constants/emojis/general_emojis';
-import { arthur, barFalse, barTrue, doug, liquidDrinkers, python, rickroll, rip, scratch, } from '../../constants/emojis/slots_emojis';
+import { gold } from '../../constants/emojis/general_emojis.js';
+import { arthur, barFalse, barTrue, doug, liquidDrinkers, python, rickroll, rip, scratch, } from '../../constants/emojis/slots_emojis.js';
 function renderReels(reels) {
     const space = '\u2004\u2004';
     const leftReelEdge = `|${space}`;
