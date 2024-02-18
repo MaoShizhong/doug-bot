@@ -3,6 +3,11 @@
     "version": "1.0.0",
     "description": "",
     "type": "module",
+    "engines": {
+        "node": ">=20.0.0"
+    },
+    "nodeVersion": "20.5.1",
+    "main": "dist/main.js",
     "scripts": {
         "start": "node ./dist/main.js",
         "deploy-commands": "node deploy-commands.js",
