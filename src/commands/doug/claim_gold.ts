@@ -19,25 +19,23 @@ const command: SlashCommand = {
         }
 
         if (user.canClaimGold) {
-            (user.gold as number) += GOLD_CLAIM_AMOUNT;
+            user.gold = Number(user.gold) + GOLD_CLAIM_AMOUNT;
             user.lastGoldClaim = Date.now();
 
             await Promise.all([
                 user.save(),
                 interaction.reply({
                     content:
-                        `+${User.goldClaimAmount}${gold}! ` +
+                        `+${GOLD_CLAIM_AMOUNT}${gold}! ` +
                         `You currently have ${user.goldString}${gold}\n` +
-                        `You may claim ${
-                            User.goldClaimAmount
-                        }${gold}for free up to once every hour. Your next claim will be available in ${Math.round(
+                        `You may claim ${GOLD_CLAIM_AMOUNT}${gold}for free up to once every hour. Your next claim will be available in ${Math.round(
                             GOLD_CLAIM_COOLDOWN_MS / 60000
                         )} minutes.`,
                     allowedMentions: { repliedUser: false },
                 }),
             ]);
         } else {
-            const remainingTimeInMS = Date.now() - (user.lastGoldClaim as number);
+            const remainingTimeInMS = Date.now() - Number(user.lastGoldClaim);
             const remainingTimeInMins = 60 - Math.floor(remainingTimeInMS / 60000);
 
             await interaction.reply({

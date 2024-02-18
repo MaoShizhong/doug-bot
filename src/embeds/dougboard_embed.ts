@@ -2,11 +2,14 @@ import { EmbedBuilder } from 'discord.js';
 import { User } from '../db/models/User';
 
 export async function getDougBoard(guildID: string): Promise<EmbedBuilder> {
-    const sortedUsersByDougDesc = await User[guildID]
-        .find({})
-        .select('name douggedPercentage')
-        .sort({ douggedPercentage: -1 })
-        .exec();
+    const users = await User[guildID].find({}).select('name messages').exec();
+
+    const sortedUsersByDougDesc = users.sort((userA, userB): number => {
+        const dougRatioA = userA.messages.dougged / (userA.messages.total ?? 0);
+        const dougRatioB = userB.messages.dougged / (userB.messages.total ?? 0);
+
+        return dougRatioB - dougRatioA;
+    });
 
     let leaderboard = '```\n';
 

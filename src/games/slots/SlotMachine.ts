@@ -47,7 +47,7 @@ export class SlotMachine {
             const earnings = this.bet * this.score;
             addBetResultsToEmbed(resultsEmbed, this.bet, earnings, this.player.goldString);
 
-            (this.player.gold as number) += earnings;
+            this.player.gold = Number(this.player.gold) + earnings;
         }
 
         return resultsEmbed;

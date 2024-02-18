@@ -24,10 +24,10 @@ const command: SlashCommand = {
             return;
         }
 
-        if (bet && (user.gold as number) < bet) {
+        if (bet && Number(user.gold) < bet) {
             await interaction.reply(user.insufficientGoldMessage);
         } else {
-            (user.gold as number) -= bet ?? 0;
+            user.gold = Number(user.gold) - (bet ?? 0);
             const slotMachine = new SlotMachine(user, bet);
             const resultsEmbed = slotMachine.getSlotsResults();
 

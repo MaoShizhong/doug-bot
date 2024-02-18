@@ -13,7 +13,7 @@ const command: SlashCommand = {
         const interactionUser = interaction.member as GuildMember;
         const userID = interaction.options.getString('id') ?? interactionUser.id;
 
-        const profileEmbed = showProfile(userID, interaction.guildId as string);
+        const profileEmbed = await showProfile(userID, interaction.guildId as string);
         if (!profileEmbed) {
             await interaction.reply({ content: 'No user in this server found with that ID!' });
         } else {

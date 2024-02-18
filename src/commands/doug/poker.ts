@@ -37,10 +37,10 @@ const command: SlashCommand = {
             return;
         }
 
-        if (bet && (user.gold as number) < bet) {
+        if (bet && Number(user.gold) < bet) {
             await interaction.reply(user.insufficientGoldMessage);
         } else {
-            (user.gold as number) -= bet;
+            user.gold = Number(user.gold) - bet;
             const pokerRound = new FiveCardDraw(bet);
 
             await interaction.reply({
@@ -81,7 +81,10 @@ function collectReactionsAndRedrawHand(
     const validReactions = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '✅'];
 
     // Only accept the active player's reactions (and only valid reactions)
-    const collectorFilter: CollectorFilter<[MessageReaction, DiscordUser]> = (reaction, user): boolean => {
+    const collectorFilter: CollectorFilter<[MessageReaction, DiscordUser]> = (
+        reaction,
+        user
+    ): boolean => {
         return user.id === account._id && validReactions.includes(reaction.emoji.name!);
     };
 

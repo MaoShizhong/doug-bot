@@ -14,7 +14,8 @@ import { handleIncomingMessage } from './messages/messages';
 initialiseDatabase();
 
 bot.on('ready', async (client): Promise<void> => {
-    console.log('Logged in as Doug Lloyd!');
+    console.log('\n------------------');
+    console.log('Logged in as Doug Lloyd!\n');
 
     const servers: Guild[] = Array.from(client.guilds.cache.values());
     servers.forEach(handleServerMemberChanges);
