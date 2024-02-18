@@ -1,9 +1,9 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { helpOne, helpTwo } = require('../../embeds/commands_embeds.js');
+import { SlashCommandBuilder } from 'discord.js';
+import { commandsEmbeds } from '../../embeds/commands_embeds.js';
 
 const MAO_ID = '120227869157883904';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
         .setName('setnewcommandsembed')
         .setDescription('For Mao to edit the changelog commands embed only'),

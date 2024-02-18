@@ -1,10 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { User } = require('../../users/User.js');
-const { Storage } = require('../../local-storage.js');
-const poker = require('../../games/five_card_draw/five_card_draw_embed.js');
-const { FiveCardDraw } = require('../../games/five_card_draw/PokerController.js');
+import { SlashCommandBuilder } from 'discord.js';
+import { FiveCardDraw } from '../../games/five_card_draw/PokerController.js';
+import { poker } from '../../games/five_card_draw/five_card_draw_embed.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
         .setName('poker')
         .setDescription('Try your luck at 5 card draw!')
@@ -33,7 +31,7 @@ module.exports = {
             const hand = poker.getHandDisplay(pokerRound, true);
             let handDisplay = hand[0];
 
-            /* 
+            /*
                 Puts card emojis in normal text below multipliers embed, as embeds
                 have reduced font-size. Cards will show up one by one to simulate drawing.
             */
@@ -63,7 +61,7 @@ module.exports = {
 function collectReactionsAndRedrawHand(message, account, pokerRound) {
     const validReactions = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '✅'];
 
-    /* 
+    /*
         Only accept the active player's reactions (and only valid reactions)
     */
     const collectorFilter = (reaction, user) => {

@@ -1,7 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { showProfile } = require('../../embeds/profile_embed.js');
+import { SlashCommandBuilder } from 'discord.js';
+import { showProfile } from '../../embeds/profile_embed.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
         .setName('showprofile')
         .setDescription('Display your profile (or provide a user ID to show a specific profile)')

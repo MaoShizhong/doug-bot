@@ -1,11 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { ChatOpenAI } = require('langchain/chat_models/openai');
-const { SystemChatMessage } = require('langchain/schema');
-const { openAIKey } = require('../../keys.json');
+import { SlashCommandBuilder } from 'discord.js';
+import { SystemMessage } from 'langchain/schema';
+import { GPT_CLIENT } from '../../config/AI';
 
-const chat = new ChatOpenAI({ openAIApiKey: openAIKey, temperature: 0.9 });
-
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
         .setName('continue')
         .setDescription('Continue a Doug-GPT message from a previous message ID')

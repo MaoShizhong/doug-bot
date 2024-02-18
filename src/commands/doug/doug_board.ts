@@ -1,7 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { getDougBoard } = require('../../embeds/dougboard_embed.js');
+import { SlashCommandBuilder } from 'discord.js';
+import { getDougBoard } from '../../embeds/dougboard_embed.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder().setName('dougboard').setDescription('Who has gotten dougged the most?'),
     async execute(interaction) {
         await interaction.reply({ embeds: [getDougBoard()] });
