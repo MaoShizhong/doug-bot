@@ -1,7 +1,18 @@
-import { GuildMember, Message, SlashCommandBuilder } from 'discord.js';
-import { User } from '../../db/models/User';
+import {
+    CollectorFilter,
+    GuildMember,
+    Message,
+    MessageReaction,
+    SlashCommandBuilder,
+    type User as DiscordUser,
+} from 'discord.js';
+import { User, UserModel } from '../../db/models/User';
 import { FiveCardDraw } from '../../games/five_card_draw/PokerController';
-import { poker } from '../../games/five_card_draw/five_card_draw_embed';
+import {
+    getBasePokerEmbed,
+    getHandDisplay,
+    getResultsEmbed,
+} from '../../games/five_card_draw/five_card_draw_embed';
 import { SlashCommand } from '../../types';
 
 const command: SlashCommand = {
@@ -26,17 +37,18 @@ const command: SlashCommand = {
             return;
         }
 
-        try {
+        if (bet && (user.gold as number) < bet) {
+            await interaction.reply(user.insufficientGoldMessage);
+        } else {
             (user.gold as number) -= bet;
             const pokerRound = new FiveCardDraw(bet);
 
             await interaction.reply({
-                embeds: [poker.getBasePokerEmbed(user, bet)],
-
+                embeds: [getBasePokerEmbed(user.profileColor, bet)],
                 allowedMentions: { repliedUser: false },
             });
 
-            const hand = poker.getHandDisplay(pokerRound, true);
+            const hand = getHandDisplay(pokerRound, true);
             let handDisplay = hand[0];
 
             /*
@@ -57,18 +69,20 @@ const command: SlashCommand = {
                     });
                     collectReactionsAndRedrawHand(message, user, pokerRound);
                 });
-        } catch {
-            await interaction.reply(user.insufficientGoldMessage);
         }
     },
 };
 
-function collectReactionsAndRedrawHand(message: Message, account, pokerRound): void {
+function collectReactionsAndRedrawHand(
+    message: Message,
+    account: UserModel,
+    pokerRound: FiveCardDraw
+): void {
     const validReactions = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '✅'];
 
     // Only accept the active player's reactions (and only valid reactions)
-    const collectorFilter = (reaction, user) => {
-        return user.id === account.id && validReactions.includes(reaction.emoji.name);
+    const collectorFilter: CollectorFilter<[MessageReaction, DiscordUser]> = (reaction, user): boolean => {
+        return user.id === account._id && validReactions.includes(reaction.emoji.name!);
     };
 
     const collector = message.createReactionCollector({
@@ -77,46 +91,48 @@ function collectReactionsAndRedrawHand(message: Message, account, pokerRound): v
         time: 30000,
     });
 
-    const changePage = (reaction, pokerRound) => {
+    const changePage = (reaction: MessageReaction, pokerRound: FiveCardDraw): void => {
         if (reaction.emoji.name === '✅') {
             collector.stop();
             return;
         }
 
-        const cardToHold = validReactions.indexOf(reaction.emoji.name);
+        const cardToHold = validReactions.indexOf(reaction.emoji.name!);
         pokerRound.hand[cardToHold].redraw = !pokerRound.hand[cardToHold].redraw;
     };
 
-    collector.on('collect', (reaction) => changePage(reaction, pokerRound));
-    collector.on('remove', (reaction) => changePage(reaction, pokerRound));
-    collector.on('end', () => {
-        const hand = poker.getHandDisplay(pokerRound, false);
+    collector.on('collect', (reaction): void => changePage(reaction, pokerRound));
+    collector.on('remove', (reaction): void => changePage(reaction, pokerRound));
+    collector.on('end', (): void => {
+        const hand = getHandDisplay(pokerRound, false);
         let handDisplay = hand[0];
 
         message
             .reply({
-                content: `For <@${account.id}> - after redrawing:\n\n${handDisplay}`,
-
+                content: `For <@${account._id}> - after redrawing:\n\n${handDisplay}`,
+                // @ts-expect-error fetchReply seems to exist but is not on the automatic type?
                 fetchReply: true,
             })
-            .then((message): void => {
+            .then(async (message): Promise<void> => {
                 hand.slice(1).forEach((card): void => {
                     handDisplay += card;
                     message.edit({
-                        content: `For <@${account.id}> - after redrawing:\n\n${handDisplay}`,
+                        content: `For <@${account._id}> - after redrawing:\n\n${handDisplay}`,
                     });
                 });
 
                 // show result after previous edits
                 message.edit({
-                    content: `For <@${account.id}> - after redrawing:\n\n${handDisplay}`,
-                    embeds: [poker.getResultsEmbed(pokerRound, account)],
+                    content: `For <@${account._id}> - after redrawing:\n\n${handDisplay}`,
+                    embeds: [await getResultsEmbed(pokerRound, account)],
                 });
             });
     });
 
     // only react once the ReactionCollector has been created
-    validReactions.forEach((emoji) => message.react(emoji));
+    validReactions.forEach((emoji): void => {
+        message.react(emoji);
+    });
 }
 
 export default command;
