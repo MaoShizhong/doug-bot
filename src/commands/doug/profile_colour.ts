@@ -39,10 +39,13 @@ const command: SlashCommand = {
             });
         } else {
             user.profileColor = color;
-            await interaction.reply({
-                content: `Your profile color has been changed to #${hex}.`,
-                allowedMentions: { repliedUser: false },
-            });
+            await Promise.all([
+                user.save(),
+                interaction.reply({
+                    content: `Your profile color has been changed to #${hex}.`,
+                    allowedMentions: { repliedUser: false },
+                }),
+            ]);
         }
     },
 };

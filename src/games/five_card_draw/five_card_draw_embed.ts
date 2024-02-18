@@ -51,7 +51,7 @@ export async function getResultsEmbed(
 ): Promise<EmbedBuilder> {
     const [result, multiplier, winnings] = pokerRound.scoreHand();
 
-    (account.gold as number) += winnings;
+    account.gold = Number(account.gold) + winnings;
     // @ts-expect-error .save() does exist but the correct Mongoose type is very long - not yet figured out how best to resolve
     await account.save();
 

@@ -27,7 +27,7 @@ export async function showProfile(
                 `*You have a claim available! Enter \`/gold\` to claim ${GOLD_CLAIM_AMOUNT}${gold}*`,
         });
     } else {
-        const remainingTimeInMS = Date.now() - (user.lastGoldClaim as number);
+        const remainingTimeInMS = Date.now() - Number(user.lastGoldClaim);
         const remainingTimeInMins = 60 - Math.floor(remainingTimeInMS / 60000);
 
         profile.addFields({
@@ -47,5 +47,3 @@ export async function showProfile(
 
     return profile;
 }
-
-exports.showProfile = showProfile;

@@ -38,9 +38,6 @@ export const commandsEmbeds = {
         .setAuthor({ name: 'Page: 2 / 2' })
         .setTitle('Commands')
         .addFields(
-            { name: '/doug', value: 'Gaze upon my beauty.' },
-            { name: '/brian', value: "This guy isn't too bad either." },
-            { name: '/david', value: "I'm better." },
             {
                 name: '/recursion',
                 value: '```js\nconst rec = () => !willClickLink() || rec();\n```',
