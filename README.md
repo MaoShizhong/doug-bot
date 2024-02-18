@@ -13,7 +13,7 @@
   - `BOT_TOKEN`: The bot's application token
   - `OPENAI_KEY`: Can create a free openAI account and generate your own key
   - `DB_URL`: MongoDB connection string in the format `mongodb+srv://<username>:<password>@cluster0.iqgpsei.mongodb.net/<db_name>`
-- `/src/server_IDs.json` which includes the server IDs intended for the database (can easily fetch your test server's ID in Discord)
+- `/assets/server_IDs.json` which includes the server IDs intended for the database (can easily fetch your test server's ID in Discord)
 
 ## How to develop and test with a local bot
 
@@ -25,7 +25,7 @@
 1. Make a `.env` file in the project root. Inside it, add the 4 variables and values as listed above.
     - Your free MongoDB Atlas cluster will not have any databases inside of it. In the connection string, for the `<db_name>` segment, you can pick whatever name you wish. Mongoose will automatically create a database in the cluster with this name if it does not already exist.
     - If you wish to see Mongoose dev logs whenever a query is made, add `MODE=dev` to your `.env`.
-1. Make a `src/server_IDs.json` file that will be object where the key(s) is the name of your server, and its value is the server's Discord ID. For example:
+1. Make an `assets/server_IDs.json` file that will be object where the key(s) is the name of your server, and its value is the server's Discord ID. For example:
 
     ```json
     {
