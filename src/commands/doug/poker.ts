@@ -1,4 +1,4 @@
-import { GuildMember, SlashCommandBuilder } from 'discord.js';
+import { GuildMember, Message, SlashCommandBuilder } from 'discord.js';
 import { User } from '../../db/models/User';
 import { FiveCardDraw } from '../../games/five_card_draw/PokerController';
 import { poker } from '../../games/five_card_draw/five_card_draw_embed';
@@ -63,7 +63,7 @@ const command: SlashCommand = {
     },
 };
 
-function collectReactionsAndRedrawHand(message, account, pokerRound): void {
+function collectReactionsAndRedrawHand(message: Message, account, pokerRound): void {
     const validReactions = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '✅'];
 
     // Only accept the active player's reactions (and only valid reactions)

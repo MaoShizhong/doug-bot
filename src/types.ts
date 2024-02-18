@@ -8,3 +8,11 @@ export type SlashCommand = {
 export interface IBotClient extends Client {
     commands: Collection<string, SlashCommand>;
 }
+
+export type SlotEmoji = {
+    quantity: number;
+    emoji: string;
+    match5: number;
+    match4: number;
+    match3: number;
+};
