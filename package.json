@@ -1,32 +1,37 @@
 {
-  "name": "nodejs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "deploy": "node deploy-commands.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@types/node": "^18.0.6",
-    "discord.js": "^14.11.0",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "langchain": "^0.0.84",
-    "node-fetch": "^3.2.6",
-    "node-localstorage": "^2.2.1"
-  },
-  "devDependencies": {
-    "husky": "^8.0.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "./husky/pre-commit",
-      "pre-push": "./husky/pre-push $HUSKY_GIT_STDIN"
+    "name": "doug-bot",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "scripts": {
+        "start": "node ./dist/main.js",
+        "deploy-commands": "node deploy-commands.js",
+        "deploy-commands-ts": "tsx ./src/deploy-commands.ts",
+        "dev": "tsx watch ./src/main.ts",
+        "compile": "tsc && ts-cleaner",
+        "compile-watch": "concurrently \"tsc --watch\" \"ts-cleaner --watch\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "discord.js": "^14.12.1",
+        "dotenv": "^16.4.4",
+        "langchain": "^0.0.205",
+        "log-timestamp": "^0.3.0",
+        "mongoose": "^8.1.3",
+        "mongoose-long": "^0.8.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.19",
+        "@typescript-eslint/eslint-plugin": "^7.0.1",
+        "@typescript-eslint/parser": "^7.0.1",
+        "concurrently": "^8.2.2",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "prettier": "^3.2.5",
+        "ts-cleaner": "^1.0.5",
+        "tsx": "^4.7.1",
+        "typescript": "^5.3.3"
     }
-  }
 }
