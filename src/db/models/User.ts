@@ -11,16 +11,15 @@ import {
 } from './virtuals';
 
 mongooseLong(mongoose);
-const { Long } = mongoose.Schema.Types;
 
-type Int64 = number | typeof Long;
+type Int64 = mongoose.Types.Long | number;
 
 type UserVirtuals = {
-    goldString: () => string;
-    hasLowGold: () => string;
-    douggedPercentage: () => number;
-    canClaimGold: () => boolean;
-    insufficientGoldMessage: () => string;
+    goldString: string;
+    hasLowGold: string;
+    douggedPercentage: number;
+    canClaimGold: boolean;
+    insufficientGoldMessage: string;
 };
 
 type UserModel = {
@@ -45,8 +44,8 @@ for (const [serverName, serverID] of Object.entries(servers)) {
             _id: { type: String, required: true },
             name: { type: String, required: true },
             avatar: { type: String, required: true },
-            gold: { type: Long, default: STARTING_GOLD },
-            lastGoldClaim: { type: Long, default: 0 },
+            gold: { type: Schema.Types.Long, default: STARTING_GOLD },
+            lastGoldClaim: { type: Schema.Types.Long, default: 0 },
             profileColor: { type: Number, default: 0xffffff },
             messages: {
                 total: { type: Number, default: 0 },
