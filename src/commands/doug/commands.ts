@@ -1,18 +1,27 @@
-import { SlashCommandBuilder } from 'discord.js';
-import { commandsEmbeds, getCommandsEmbedPage } from '../../embeds/commands_embeds.js';
+import { CollectorFilter, MessageReaction, SlashCommandBuilder, User } from 'discord.js';
+import {
+    CommandsEmbedPage,
+    commandsEmbeds,
+    getCommandsEmbedPage,
+} from '../../embeds/commands_embeds';
+import { SlashCommand } from '../../types';
 
-export default {
+const command: SlashCommand = {
     data: new SlashCommandBuilder().setName('commands').setDescription('Show a list of commands'),
-    async execute(interaction) {
-        await interaction.reply({ embeds: [helpOne] });
+    async execute(interaction): Promise<void> {
+        await interaction.reply({ embeds: [commandsEmbeds[1]] });
 
-        await interaction.fetchReply().then((message) => {
+        await interaction.fetchReply().then((message): void => {
             message.react('⬅️');
             message.react('➡️');
 
-            const collectorFilter = (reaction, user) => {
+            const collectorFilter: CollectorFilter<[MessageReaction, User]> = (
+                reaction,
+                user
+            ): boolean => {
                 return (
-                    user.id !== '1105901074025553990' && ['⬅️', '➡️'].includes(reaction.emoji.name)
+                    user.id !== process.env.BOT_ID &&
+                    ['⬅️', '➡️'].includes(reaction.emoji.name as string)
                 );
             };
 
@@ -24,7 +33,7 @@ export default {
 
             let page = 1;
 
-            const changePage = (reaction, user) => {
+            const changePage = (reaction: MessageReaction): void => {
                 const [firstPage, lastPage] = [1, 2];
 
                 if (reaction.emoji.name === '⬅️') {
@@ -32,7 +41,8 @@ export default {
                 } else {
                     page = ++page > lastPage ? firstPage : page;
                 }
-                message.edit({ embeds: [getCommandsEmbedPage(page)] });
+
+                message.edit({ embeds: [getCommandsEmbedPage(page as CommandsEmbedPage)] });
             };
 
             collector.on('collect', changePage);
@@ -40,3 +50,5 @@ export default {
         });
     },
 };
+
+export default command;
