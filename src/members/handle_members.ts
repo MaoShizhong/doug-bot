@@ -1,13 +1,14 @@
 import { Guild, GuildMember, PartialGuildMember } from 'discord.js';
-import servers from '../../assets/server_IDs.json' assert { type: 'json' };
 import { User } from '../db/models/User.js';
+
+const servers = JSON.parse(process.env.SERVER_IDS ?? '{}');
 
 /**
  * To be run when bot reloads to capture any changes to servers
  * during the time the bot was inactive.
  */
 export async function handleServerMemberChanges(server: Guild): Promise<void> {
-    // Only handle servers listed in `server_IDs.json`
+    // Only handle servers listed in `process.env.SERVER_IDS`
     if (!Object.values(servers).includes(server.id)) return;
 
     let changesMadeToMemberList = false;

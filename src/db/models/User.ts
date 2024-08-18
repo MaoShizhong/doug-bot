@@ -1,6 +1,5 @@
 import mongoose, { Schema, model, type Model } from 'mongoose';
 import mongooseLong from 'mongoose-long';
-import servers from '../../../assets/server_IDs.json' assert { type: 'json' };
 import { STARTING_GOLD } from '../../constants/constants.js';
 import {
     calculateDouggedPercentage,
@@ -35,6 +34,7 @@ type UserModel = {
     };
 } & UserVirtuals;
 
+const servers: { [key: string]: string } = JSON.parse(process.env.SERVER_IDS ?? '{}');
 const User: { [key: string]: Model<UserModel> } = {};
 
 // Make separate collection for each server the bot is in
