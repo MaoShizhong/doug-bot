@@ -14,7 +14,10 @@
         "deploy-commands-ts": "tsx ./src/deploy-commands.ts",
         "dev": "tsx watch ./src/main.ts",
         "compile": "tsc && ts-cleaner",
-        "compile-watch": "concurrently \"tsc --watch\" \"ts-cleaner --watch\""
+        "compile-watch": "concurrently \"tsc --watch\" \"ts-cleaner --watch\"",
+        "lint": "eslint .",
+        "format:check-all": "prettier --check .",
+        "format:write": "prettier --cache --write"
     },
     "keywords": [],
     "author": "",

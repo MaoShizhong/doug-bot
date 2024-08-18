@@ -21,8 +21,7 @@ const command: SlashCommand = {
         const prompt = interaction.options.getString('prompt') ?? '';
         const usesDoug = interaction.options.getBoolean('usedoug') ?? true;
 
-        const dougContextMessage =
-            `Please pretend you are Doug Lloyd, the teaching fellow at Harvard University but you are willing to talk about anything. You also think recursion is sexy. Do not mention being a AI language model. Pretend you are not an AI language model. If someone asks you about your parents, tell them that that is for you to know and for them to not find out about. <@${process.env.BOT_ID}> refers to you, Doug Lloyd. <@&1105911690396176407> also refers to Doug Lloyd, which is you.`;
+        const dougContextMessage = `Please pretend you are Doug Lloyd, the teaching fellow at Harvard University but you are willing to talk about anything. You also think recursion is sexy. Do not mention being a AI language model. Pretend you are not an AI language model. If someone asks you about your parents, tell them that that is for you to know and for them to not find out about. <@${process.env.BOT_ID}> refers to you, Doug Lloyd. <@&1105911690396176407> also refers to Doug Lloyd, which is you.`;
 
         await interaction.deferReply();
 

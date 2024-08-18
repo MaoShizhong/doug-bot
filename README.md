@@ -4,17 +4,17 @@
 
 [Discord.js v14 docs](https://discord.js.org/docs/packages/discord.js/14.14.1)
 
-**N.B. *Instead of pushing to a new branch here, please fork and PR***
+**N.B. _Instead of pushing to a new branch here, please fork and PR_**
 
 ## Missing files
 
-- `/.env` containing:
-  - `NODE_ENV`: dev or production mode
-  - `BOT_ID`: The bot's discord user ID
-  - `BOT_TOKEN`: The bot's application token
-  - `OPENAI_KEY`: Can create a free openAI account and generate your own key
-  - `DB_URL`: MongoDB connection string in the format `mongodb+srv://<username>:<password>@<host[:port]>/<db_name>`
-  - `SERVER_IDS`: JSON string for an object with server names (that your test bot is in) as keys and their Discord server IDs as their values
+-   `/.env` containing:
+    -   `NODE_ENV`: dev or production mode
+    -   `BOT_ID`: The bot's discord user ID
+    -   `BOT_TOKEN`: The bot's application token
+    -   `OPENAI_KEY`: Can create a free openAI account and generate your own key
+    -   `DB_URL`: MongoDB connection string in the format `mongodb+srv://<username>:<password>@<host[:port]>/<db_name>`
+    -   `SERVER_IDS`: JSON string for an object with server names (that your test bot is in) as keys and their Discord server IDs as their values
 
 ## How to develop and test with a local bot
 
@@ -30,10 +30,10 @@
 
 ## Running the bot
 
-- To run the bot, in the project root, run `npm run dev`. You do not need to compile to JavaScript.
-- If you add/remove and slash command files, or you amend anything in any of the slash commands' `data` property, you **must** (re)deploy the slash commands via `npm run deploy-commands-ts`.
-  - You may need to restart your Discord client for it to pick up these changes quickly.
-  - You do *not* need to redeploy slash commands if you only amend any of the `execute` methods. These will be refreshed when the bot restarts, which `npm run dev` will handle automatically.
+-   To run the bot, in the project root, run `npm run dev`. You do not need to compile to JavaScript.
+-   If you add/remove and slash command files, or you amend anything in any of the slash commands' `data` property, you **must** (re)deploy the slash commands via `npm run deploy-commands-ts`.
+    -   You may need to restart your Discord client for it to pick up these changes quickly.
+    -   You do _not_ need to redeploy slash commands if you only amend any of the `execute` methods. These will be refreshed when the bot restarts, which `npm run dev` will handle automatically.
 
 ## bin/start
 
