@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+import { execSync } from 'node:child_process';
+
+execSync('npm run compile && npm run start', { stdio: 'inherit' });
