@@ -51,8 +51,7 @@ export async function addMember(member: GuildMember): Promise<void> {
         await newUser.save();
         console.log(`${username} (ID: ${id}) joined server ${serverID} - adding to db\n`);
     } catch (error) {
-        console.error(`Error creating new user: ${username} - ${id}:`);
-        console.error(error, '\n');
+        console.error(`Error creating new user: ${username} - ${id}:\n`, error, '\n');
     }
 }
 
@@ -64,8 +63,7 @@ export async function removeMember(member: GuildMember | PartialGuildMember): Pr
         await User[serverID].findByIdAndDelete(id);
         console.log(`${username} (ID: ${id}) left the server ${serverID} - removing from db\n`);
     } catch (error) {
-        console.error(`Error removing user from db: ${username} - ${id}`);
-        console.error(error, '\n');
+        console.error(`Error removing user from db: ${username} - ${id}\n`, error, '\n');
     }
 }
 
@@ -92,8 +90,9 @@ export async function updateMember(
         );
     } catch (error) {
         console.error(
-            `Error updating user: "${oldName}" (ID: ${id}) with new name "${newName}" or new avatar URL`
+            `Error updating user: "${oldName}" (ID: ${id}) with new name "${newName}" or new avatar URL\n`,
+            error,
+            '\n'
         );
-        console.error(error, '\n');
     }
 }
