@@ -23,7 +23,7 @@ export async function handleServerMemberChanges(server: Guild): Promise<void> {
         const userInDatabase = existingServerMembers.find((user): boolean => user._id === id);
 
         if (!userInDatabase) {
-            addMemberToServer(account);
+            addMember(account);
             changesMadeToMemberList = true;
         } else if (name !== userInDatabase.name) {
             await User[server.id].findByIdAndUpdate(id, { name });
@@ -36,7 +36,7 @@ export async function handleServerMemberChanges(server: Guild): Promise<void> {
     }
 }
 
-export async function addMemberToServer(member: GuildMember): Promise<void> {
+export async function addMember(member: GuildMember): Promise<void> {
     const { id, username } = member.user;
     const serverID = member.guild.id;
     const serverModel = User[serverID];
@@ -51,12 +51,25 @@ export async function addMemberToServer(member: GuildMember): Promise<void> {
         await newUser.save();
         console.log(`${username} (ID: ${id}) joined server ${serverID} - adding to db\n`);
     } catch (error) {
-        console.error(`Error creating new user: ${username} - ${id}`);
+        console.error(`Error creating new user: ${username} - ${id}:`);
         console.error(error, '\n');
     }
 }
 
-export async function updateMemberDetails(
+export async function removeMember(member: GuildMember | PartialGuildMember): Promise<void> {
+    const { id, username } = member.user;
+    const serverID = member.guild.id;
+
+    try {
+        await User[serverID].findByIdAndDelete(id);
+        console.log(`${username} (ID: ${id}) left the server ${serverID} - removing from db\n`);
+    } catch (error) {
+        console.error(`Error removing user from db: ${username} - ${id}`);
+        console.error(error, '\n');
+    }
+}
+
+export async function updateMember(
     oldDetails: GuildMember | PartialGuildMember,
     newDetails: GuildMember
 ): Promise<void> {
