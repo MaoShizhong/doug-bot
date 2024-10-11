@@ -1,9 +1,8 @@
-import { ChatOpenAI } from 'langchain/chat_models/openai';
+import { ChatOpenAI } from '@langchain/openai';
 
-const AI_OPTIONS = {
-    openAIApiKey: process.env.OPENAI_KEY,
-    temperature: 0.9,
-};
-
-// GPT 3.5-Turbo - exported for use in /douggpt slash command file
-export const GPT_CLIENT = new ChatOpenAI(AI_OPTIONS);
+export const GPT_CLIENT = new ChatOpenAI({
+    apiKey: process.env.OPENAI_KEY,
+    maxTokens: 1900,
+    model: 'gpt-4o-mini',
+    temperature: 0.5,
+});
