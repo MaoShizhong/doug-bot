@@ -1,5 +1,5 @@
+import { SystemMessage } from '@langchain/core/messages';
 import { SlashCommandBuilder } from 'discord.js';
-import { SystemMessage } from 'langchain/schema';
 import { GPT_CLIENT } from '../../config/AI.js';
 import { SlashCommand } from '../../types.js';
 
