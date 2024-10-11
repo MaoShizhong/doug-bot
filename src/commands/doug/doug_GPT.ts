@@ -35,7 +35,7 @@ const command: SlashCommand = {
             : `Prompt (no Doug context):\n> ${prompt}`;
 
         await interaction.editReply(promptMessage);
-        await interaction.followUp(String(response.content));
+        await interaction.followUp(String(response.content.slice(0, 2000)));
     },
 };
 
