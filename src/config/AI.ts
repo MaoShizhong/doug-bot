@@ -1,6 +1,8 @@
-import { ChatOpenAI } from 'langchain/chat_models/openai';
+import { ChatOpenAI } from '@langchain/openai';
 
 export const GPT_CLIENT = new ChatOpenAI({
-    openAIApiKey: process.env.OPENAI_KEY,
-    temperature: 0.9,
+    apiKey: process.env.OPENAI_KEY,
+    maxTokens: 1900,
+    model: "gpt-4o-mini",
+    temperature: 0.5,
 });

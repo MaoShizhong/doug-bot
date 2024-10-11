@@ -1,5 +1,5 @@
+import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { SlashCommandBuilder } from 'discord.js';
-import { HumanMessage, SystemMessage } from 'langchain/schema';
 import { GPT_CLIENT } from '../../config/AI.js';
 import { SlashCommand } from '../../types.js';
 
@@ -35,7 +35,7 @@ const command: SlashCommand = {
             : `Prompt (no Doug context):\n> ${prompt}`;
 
         await interaction.editReply(promptMessage);
-        await interaction.followUp(response.content.slice(0, 2000) as string);
+        await interaction.followUp(String(response.content));
     },
 };
 
