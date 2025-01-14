@@ -129,7 +129,7 @@ export function addBetResultsToEmbed(
             value: `${earnings.toLocaleString('en-US')}${gold}`,
             inline: true,
         },
-        { name: 'Current gold', value: `${userGoldString}${gold}` }
+        { name: 'Current gold', value: `${Number(userGoldString) + earnings}${gold}` }
     );
 
     return;
